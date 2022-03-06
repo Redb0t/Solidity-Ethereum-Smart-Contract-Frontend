@@ -11,7 +11,7 @@ const App = () => {
   /**
    * Create a varaible here that holds the contract address after you deploy!
    */
-  const contractAddress = "0x131d5d1C027887907bC480c4bbc5d2B9f3c82a5d";
+  const contractAddress = "0x148dc203a63f03e836Ff0fA6a245C2FbC20e915d";
   const contractABI = abi.abi;
 
   const checkIfWalletIsConnected = async () => {
@@ -42,8 +42,9 @@ const App = () => {
       }
     }
 
-  const getAllWaves = async () => {
+const getAllWaves = async () => {
   const { ethereum } = window;
+
   try {
     if (ethereum) {
       const provider = new ethers.providers.Web3Provider(ethereum);
@@ -67,9 +68,11 @@ const App = () => {
     console.log(error);
   }
 };
+
+/**
+ * Listen in for emitter events!
+ */
 useEffect(() => {
-  checkIfWalletIsConnected();
-  
   let wavePortalContract;
 
   const onNewWave = (from, timestamp, message) => {
@@ -96,7 +99,6 @@ useEffect(() => {
     if (wavePortalContract) {
       wavePortalContract.off("NewWave", onNewWave);
     }
-  getAllWaves();
   };
 }, []);
   
